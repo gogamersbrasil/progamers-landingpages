@@ -4,8 +4,6 @@ import { Mail, Phone, MapPin, Send } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "./card";
 
 export default function ContactSection() {
-
-
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -23,35 +21,29 @@ export default function ContactSection() {
     }));
   };
 
- const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault();
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
 
-  const scriptURL = "https://script.google.com/macros/s/AKfycby6HxcbBM0kKO_nsoSLDxTCSm5eMMCLKppKnu3hYCXCkfrCgvX1hPYHZydj0wvMlQGp/exec";
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
 
-  const formDataToSend = new FormData();
-  formDataToSend.append("name", formData.name);
-  formDataToSend.append("email", formData.email);
-  formDataToSend.append("subject", formData.subject);
-  formDataToSend.append("message", formData.message);
-
-  try {
-    const response = await fetch(scriptURL, {
-      method: "POST",
-      body: formDataToSend, // 👈 isso evita o preflight
-    });
-
-    if (response.ok) {
-      alert("Mensagem enviada com sucesso!");
-      setFormData({ name: "", email: "", subject: "", message: "" });
-    } else {
+      if (response.ok) {
+        alert("Mensagem enviada com sucesso!");
+        setFormData({ name: "", email: "", subject: "", message: "" });
+      } else {
+        alert("Erro ao enviar a mensagem.");
+      }
+    } catch (error) {
+      console.error("Erro ao enviar:", error);
       alert("Erro ao enviar a mensagem.");
     }
-  } catch (error) {
-    console.error("Erro ao enviar:", error);
-    alert("Erro ao enviar a mensagem.");
-  }
-};
-
+  };
 
   const contactInfo = [
     {
@@ -131,7 +123,12 @@ export default function ContactSection() {
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <form method="post" name="formulario-contato" onSubmit={handleSubmit} className="space-y-6">
+                <form
+                  method="post"
+                  name="formulario-contato"
+                  onSubmit={handleSubmit}
+                  className="space-y-6"
+                >
                   <div className="space-y-2">
                     <label htmlFor="name" className="text-white">
                       Nome
