@@ -11,18 +11,20 @@ export default function CtaProducer() {
         </p>
       </div>
 
-      <button
-        className="bg-gradient-to-r from-red-600 to-red-400 
-                  hover:from-red-700 hover:to-red-500 
-                  text-white px-6 py-2.5 
-                  rounded-md shadow-md shadow-red-500/30 
-                  hover:shadow-lg hover:shadow-red-600/50 
-                  transition-all duration-300 
-                  focus:outline-none focus:ring-2 focus:ring-red-700 focus:ring-offset-2"
-        type="button"
-      >
-        Ver Todos os Campeonatos
-      </button>
+      <div className="flex gap-4">
+        <button
+          className="mx-auto flex items-center justify-center gap-2 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-8 py-3 text-lg rounded-md shadow-lg shadow-purple-500/30 hover:shadow-purple-500/50 transition-all duration-300 transform hover:scale-105 w-60 h-12"
+          type="button"
+        >
+          Criar Conta
+        </button>
+        <button
+          className="mx-auto flex items-center justify-center gap-2 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-8 py-3 text-lg rounded-md shadow-lg shadow-purple-500/30 hover:shadow-purple-500/50 transition-all duration-300 transform hover:scale-105 w-70 h-12"
+          type="button"
+        >
+          Falar com um consultor
+        </button>
+      </div>
     </section>
   );
 }

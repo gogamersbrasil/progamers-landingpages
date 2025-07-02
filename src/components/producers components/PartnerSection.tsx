@@ -16,7 +16,7 @@ export default function PartnerSection() {
 
   return (
     <section className=" py-20">
-      <div className="container mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-12">
+      <div className="container mx-auto px-6 flex flex-col md:flex-row items-center justify-center gap-12">
         {/* Logos */}
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 w-full md:w-1/2">
           {partners.map((partner) => (
@@ -35,7 +35,6 @@ export default function PartnerSection() {
           ))}
         </div>
 
-        {/* Texto */}
         <div className="text-white max-w-md text-center md:text-left">
           <h2 className="text-2xl md:text-3xl font-bold mb-4">
             Fizemos parceiras com empresas incríveis!
@@ -50,7 +49,7 @@ export default function PartnerSection() {
             atque eaque eius esse sit harum inventore ipsam nam necessitatibus
             nemo pariatur provident.
           </p>
-          <button className="bg-pink-500 hover:bg-pink-600 text-white px-6 py-3 rounded-md transition-all">
+          <button className=" bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-6 py-3 rounded-md transition-all">
             seja nosso parceiro
           </button>
         </div>
