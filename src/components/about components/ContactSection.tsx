@@ -1,49 +1,44 @@
 "use client";
-import React, { useState } from "react";
-import { Mail, Phone, MapPin, Send } from "lucide-react";
+import React, { FormEvent, useState } from "react";
+import { Mail, Phone, MapPin } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "./card";
 
 export default function ContactSection() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    subject: "",
-    message: "",
-  });
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [subject, setSubject] = useState("");
+  const [message, setMessage] = useState("");
 
-  const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e : FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    try {
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-
-      if (response.ok) {
-        alert("Mensagem enviada com sucesso!");
-        setFormData({ name: "", email: "", subject: "", message: "" });
-      } else {
-        alert("Erro ao enviar a mensagem.");
-      }
-    } catch (error) {
-      console.error("Erro ao enviar:", error);
-      alert("Erro ao enviar a mensagem.");
+    const form = {
+      name,
+      email,
+      subject,
+      message
     }
-  };
+
+    const response = await fetch('/api/submit/route', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(form)
+    });
+
+    const content = await response.json();
+
+    console.log(content);
+    alert(content.data.tableRange);
+
+    setName('');
+    setEmail('');
+    setSubject('');
+    setMessage('');
+  }; 
+
 
   const contactInfo = [
     {
@@ -123,82 +118,87 @@ export default function ContactSection() {
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <form
-                  method="post"
-                  name="formulario-contato"
-                  onSubmit={handleSubmit}
-                  className="space-y-6"
-                >
-                  <div className="space-y-2">
-                    <label htmlFor="name" className="text-white">
+                <form className="py-6 px-4 space-y-5  rounded-xl shadow-lg" onSubmit={handleSubmit}>
+                  <div className="flex flex-col space-y-1">
+                    <label
+                      htmlFor="name"
+                      className="text-white text-sm font-medium"
+                    >
                       Nome
                     </label>
                     <input
-                      id="name"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      type="text"
                       name="name"
-                      value={formData.name}
-                      onChange={handleInputChange}
-                      className="bg-gaming-darker border-gray-700 text-white focus:border-gaming-purple"
-                      placeholder="Seu nome completo"
-                      required
+                      id="name"
+                      placeholder="Digite seu nome"
+                      className="h-11 w-full rounded-md border border-gray-700 bg-transparent px-4 py-2 text-sm text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-600"
                     />
                   </div>
 
-                  <div className="space-y-2">
-                    <label htmlFor="email" className="text-white">
+                  <div className="flex flex-col space-y-1">
+                    <label
+                      htmlFor="email"
+                      className="text-white text-sm font-medium"
+                    >
                       Email
                     </label>
                     <input
-                      id="email"
-                      name="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
                       type="email"
-                      value={formData.email}
-                      onChange={handleInputChange}
-                      className="bg-gaming-darker border-gray-700 text-white focus:border-gaming-purple"
-                      placeholder="seu@email.com"
-                      required
+                      name="email"
+                      id="email"
+                      placeholder="Digite seu email"
+                      className="h-11 w-full rounded-md border border-gray-700 bg-transparent px-4 py-2 text-sm text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-600"
                     />
                   </div>
 
-                  <div className="space-y-2">
-                    <label htmlFor="subject" className="text-white">
+                  <div className="flex flex-col space-y-1">
+                    <label
+                      htmlFor="subject"
+                      className="text-white text-sm font-medium"
+                    >
                       Assunto
                     </label>
                     <input
-                      id="subject"
+                      value={subject}
+                      onChange={(e) => setSubject(e.target.value)}
+                      type="text"
                       name="subject"
-                      value={formData.subject}
-                      onChange={handleInputChange}
-                      className="bg-gaming-darker border-gray-700 text-white focus:border-gaming-purple"
-                      placeholder="Sobre o que você quer falar?"
-                      required
+                      id="subject"
+                      placeholder="Assunto da mensagem"
+                      className="h-11 w-full rounded-md border border-gray-700 bg-transparent px-4 py-2 text-sm text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-600"
                     />
                   </div>
 
-                  <div className="space-y-2">
-                    <label htmlFor="message" className="text-white">
+                  <div className="flex flex-col space-y-1">
+                    <label
+                      htmlFor="message"
+                      className="text-white text-sm font-medium"
+                    >
                       Mensagem
                     </label>
                     <textarea
-                      id="message"
+                      value={message}
+                      onChange={(e) => setMessage(e.target.value)}
                       name="message"
-                      value={formData.message}
-                      onChange={handleInputChange}
-                      className="w-full min-h-[120px] px-3 py-2 bg-gaming-darker border border-gray-700 rounded-md text-white focus:border-gaming-purple focus:outline-none focus:ring-2 focus:ring-gaming-purple/20 resize-vertical"
-                      placeholder="Conte-nos mais detalhes..."
-                      required
+                      id="message"
+                      placeholder="Digite sua mensagem"
+                      rows={4}
+                      className="w-full rounded-md border border-gray-700 bg-transparent px-4 py-2 text-sm text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-600"
                     />
                   </div>
 
-                  <button
-                    type="submit"
-                    value="enviar"
-                    id="enviar"
-                    className="mx-auto flex items-center justify-center gap-2 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-8 py-3 text-lg rounded-md shadow-lg shadow-purple-500/30 hover:shadow-purple-500/50 transition-all duration-300 transform hover:scale-105 w-60 h-12"
-                  >
-                    <Send className="w-5 h-5" />
-                    Enviar Mensagem
-                  </button>
+                  <div className="flex justify-center">
+                    <button
+                      type="submit"
+                      className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold px-6 py-3 rounded-md transition-all shadow-md hover:shadow-lg"
+                    >
+                      Enviar
+                    </button>
+                  </div>
                 </form>
               </CardContent>
             </Card>
