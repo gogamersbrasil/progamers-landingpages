@@ -19,7 +19,7 @@ export default function ContactSection() {
       message
     }
 
-    const response = await fetch('/api/submit/route', {
+    const response = await fetch('/api/submit', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -28,10 +28,15 @@ export default function ContactSection() {
       body: JSON.stringify(form)
     });
 
-    const content = await response.json();
+const content = await response.json();
 
-    console.log(content);
-    alert(content.data.tableRange);
+console.log(content);
+
+if (content?.data?.tableRange) {
+  alert('mensagem enviada com sucesso');
+} else {
+  alert("Erro ao enviar formulário.");
+}
 
     setName('');
     setEmail('');
