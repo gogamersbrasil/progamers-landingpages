@@ -1,28 +1,43 @@
 'use client';
-import axios from 'axios'
+import axios from 'axios';
 import { useEffect, useState } from 'react';
-
+import ChampionshipCard, { ChampionshipStatus } from '../components/card/ChampionshipCard';
 
 interface Championship {
   id: string;
   name: string;
- 
+  status: ChampionshipStatus;
+  start_date: string;
+  end_date: string;
+  description?: string;
+  modality: string;
+  modality_type: string;
+  paid: boolean;
+  paid_value?: number;
+  participant_limit: number;
+  registration_start_date: string;
+  registration_end_date: string;
+  type: string;
+  created_at: string;
+  userStatus: string;
+  paymentStatus: string;
+  url_championship: string;
+  registration_participant_count: number;
 }
 
 export default function NextChampionship() {
-
   const [championships, setChampionships] = useState<Championship[]>([]);
 
-   useEffect(() => {
+  useEffect(() => {
     async function fetchNextChampionships() {
       try {
         const response = await axios.get(
-          "https://api.progamers.com.br/public/championships/next/championships"
-
+          'https://api.progamers.com.br/public/championships/next/championships'
         );
+        console.log('Campeonatos retornados:', response.data); //
         setChampionships(response.data);
       } catch (error) {
-        console.error("Erro ao buscar campeonatos:", error);
+        console.error('Erro ao buscar campeonatos:', error);
       }
     }
 
@@ -30,38 +45,30 @@ export default function NextChampionship() {
   }, []);
 
   return (
-    <section className="bg-gaming-darker flex flex-col items-center justify-center">
-      <div className="relative z-10 text-center px-4 py-15">
-        <h1 className="text-center py-2 text-4xl  md:text-4xl font-bold  text-white">
-          Proximos <span className="text-red-500">Campeonatos</span>
+    <section className=" flex flex-col gap-6 justify-center items-center bg-gaming-darker px-4 py-12">
+      <div className="text-center mb-10">
+        <h1 className="text-4xl font-bold text-white">
+          Próximos <span className="text-red-500">Campeonatos</span>
         </h1>
-        <p className="text-xl text-gray-300 max-w-2xl mx-auto ">
-          Participe dos maiores torneios de e-sports e conquiste prêmios
-          incríveis
+        <p className="text-xl text-gray-300 mt-2">
+          Participe dos maiores torneios de e-sports e conquiste prêmios incríveis
         </p>
       </div>
-        <div className="mt-8 grid grid-cols-3 md:grid-cols-2 gap-4">
-          {championships.map((champ) =>(
-            <div key={champ.id} className="bg-gray-800 text-white p-4 rounded-lg shadow-md">
-              <h3 className="text-lg font-semibold">{champ.name}</h3>
-            </div>
-          ))}
-        </div>
-      <button
-  onClick={() => window.open("https://app.progamers.com.br/championships", "_blank")}
-  className=" mt- bg-gradient-to-r from-red-600 to-red-400 
-            hover:from-red-700 hover:to-red-500 
-            text-white px-6 py-2.5 
-            rounded-md shadow-md shadow-red-500/30 
-            hover:shadow-lg hover:shadow-red-600/50 
-            transition-all duration-300 
-            focus:outline-none focus:ring-2 focus:ring-red-700 focus:ring-offset-2"
-  type="button"
->
-  Ver Todos os Campeonatos
-</button>
 
+      <div className=" grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {championships.map((champ) => (
+          <ChampionshipCard key={champ.id} {...champ} />
+        ))}
+      </div>
 
+      <div className="text-center mt-10">
+        <button
+          onClick={() => window.open('https://app.progamers.com.br/championships', '_blank')}
+          className="bg-gradient-to-r from-red-600 to-red-400 hover:from-red-700 hover:to-red-500 text-white px-6 py-3 rounded-md shadow-lg transition-all"
+        >
+          Ver Todos os Campeonatos
+        </button>
+      </div>
     </section>
   );
 }
