@@ -29,10 +29,10 @@ export default function TeamSection() {
       role: "Q.A",
       description:
         "Graduado em Sistemas de Informação e pos Graduado em engenharia de software, sempre focando em otimização e qualidade, estratégias e experiências,epicas.",
-      image: "/lovable-uploads/df53e211-12fa-4432-af87-ee2ce5c953b4.png",
+      image: "/lovable-uploads/panjota.jpg",
       social: {
-        linkedin: "https://www.linkedin.com/in/pedrocarvalhor/",
-        instagram: "https://www.instagram.com/pedrohcarvalhor",
+        linkedin: "",
+        instagram: "https://www.instagram.com/panjota.qa",
       },
     },
     {

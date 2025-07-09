@@ -5,7 +5,11 @@ interface FeatureCardProps {
   variant?: "producer" | "brand";
 }
 
-export default function FeatureCard({ icon, title, description }: FeatureCardProps) {
+export default function FeatureCard({
+  icon,
+  title,
+  description,
+}: FeatureCardProps) {
   return (
     <div
       className="
@@ -23,12 +27,14 @@ export default function FeatureCard({ icon, title, description }: FeatureCardPro
         hover:scale-[1.03] 
         w-[90%] 
         mx-auto 
-        h-[150px] 
+        h- {{md:h-[150px] sm:h-[100px] }} 
         flex flex-col items-center justify-center
       "
     >
       <div className="w-8 h-8 mb-3">{icon}</div>
-      <h3 className="text-lg font-bold mb-1 group-hover:text-gaming-purple">{title}</h3>
+      <h3 className="text-lg font-bold mb-1 group-hover:text-gaming-purple">
+        {title}
+      </h3>
       <p className="text-sm text-gray-400">{description}</p>
     </div>
   );

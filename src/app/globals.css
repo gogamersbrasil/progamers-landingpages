@@ -5,73 +5,68 @@
   --foreground: #171717;
 }
 
+@theme {
+  --color-primary-50: #fbdcde;
+  --color-primary-100: #f8cacd;
+  --color-primary-200: #f4a6ac;
+  --color-primary-300: #ef818a;
+  --color-primary-400: #e63946;
+  --color-primary-600: #cd1a27;
+  --color-primary-700: #9b141e;
+  --color-primary-800: #690d14;
+  --color-primary-900: #38070b;
+  --color-primary-950: #1f0406;
 
-
-@theme{
-  --color-primary-50: #FBDCDE;
-  --color-primary-100: #F8CACD;
-  --color-primary-200: #F4A6AC;
-  --color-primary-300: #EF818A;
-  --color-primary-400: #E63946;
-  --color-primary-600: #CD1A27;
-  --color-primary-700: #9B141E;
-  --color-primary-800: #690D14;
-  --color-primary-900: #38070B;
-  --color-primary-950: #1F0406;
-
-  --color-secondary-50: #245FB9;
-  --color-secondary-100: #2057A8;
-  --color-secondary-200: #1A4586;
+  --color-secondary-50: #245fb9;
+  --color-secondary-100: #2057a8;
+  --color-secondary-200: #1a4586;
   --color-secondary-300: #133363;
-  --color-secondary-400: #0D2241;
-  --color-secondary-500: #06101F;
+  --color-secondary-400: #0d2241;
+  --color-secondary-500: #06101f;
 
-  --color-green-50: #ACF4AC;
-  --color-green-100: #9AF29A;
-  --color-green-200: #76ED76;
-  --color-green-300: #51E851;
-  --color-green-400: #2DE32D;
-  --color-green-500: #1BCD1B;
-  --color-green-600: #149B14;
-  --color-green-700: #0E6A0E;
+  --color-green-50: #acf4ac;
+  --color-green-100: #9af29a;
+  --color-green-200: #76ed76;
+  --color-green-300: #51e851;
+  --color-green-400: #2de32d;
+  --color-green-500: #1bcd1b;
+  --color-green-600: #149b14;
+  --color-green-700: #0e6a0e;
   --color-green-800: #073807;
   --color-green-900: #010701;
   --color-green-950: #000000;
 
-
-  --color-blue-50: #9CC0F6;
-  --color-blue-100: #89B4F4;
-  --color-blue-200: #639CF1;
-  --color-blue-300: #3E84EE;
-  --color-blue-400: #196DEA;
-  --color-blue-500: #125BC8;
-  --color-blue-600: #0D4495;
-  --color-blue-700: #092C61;
-  --color-blue-800: #04152E;
+  --color-blue-50: #9cc0f6;
+  --color-blue-100: #89b4f4;
+  --color-blue-200: #639cf1;
+  --color-blue-300: #3e84ee;
+  --color-blue-400: #196dea;
+  --color-blue-500: #125bc8;
+  --color-blue-600: #0d4495;
+  --color-blue-700: #092c61;
+  --color-blue-800: #04152e;
   --color-blue-900: #010701;
   --color-blue-950: #000000;
-  --bg-gaming-darkred: #100E1A;
-  --color-gaming-red: #E63946;
-  --color-gaming-darker: #100E1A;
-  --color-gaming-dark: #161B22;
-  --color-gaming-accent: #245FB9;
-  --gaming-darkred: #100E1A;
+  --bg-gaming-darkred: #100e1a;
+  --color-gaming-red: #e63946;
+  --color-gaming-darker: #100e1a;
+  --color-gaming-dark: #161b22;
+  --color-gaming-accent: #245fb9;
+  --gaming-darkred: #100e1a;
 
-  --color-card-team-950: #100E1A;
-  --color-card-teal-20: #06101F;
-  --color-bg-app: #100E1A;
-  --color-dark-chat: #0D1117;
-  --color-dark-1: #161B22;
+  --color-card-team-950: #100e1a;
+  --color-card-teal-20: #06101f;
+  --color-bg-app: #100e1a;
+  --color-dark-chat: #0d1117;
+  --color-dark-1: #161b22;
   --h-card-team: 480px;
   --font-saira: "Saira", "sans-serif";
   --font-radjani: "Rajdhani", "sans-serif";
 
   --text-title-section: 2.4rem;
-  --text-title-sm:2rem;
+  --text-title-sm: 2rem;
 
   --default-font-family: "Saira", "sans-serif";
-
-
 }
 @font-face {
   font-family: "Rajdhani";
@@ -79,22 +74,19 @@
   font-style: normal;
 }
 
-
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0A0B16;
+    --background: #0a0b16;
     --foreground: #ededed;
   }
 }
-
 
 body {
   background: var(--background);
