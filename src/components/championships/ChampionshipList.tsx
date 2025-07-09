@@ -97,7 +97,7 @@ export default function ChampionshipList({ championships }: ChampionshipListProp
               {scrollSnaps.map((_, index) => (
                 <button
                   key={index}
-                  className={`embla__dot ${index === selectedIndex ? 'embla__dot--selected' : ''}`}
+                  className={`${index === selectedIndex ? 'embla__dot--selected' : ''}`}
                   type="button"
                   onClick={() => scrollTo(index)}
                   aria-label={`Go to slide ${index + 1}`}

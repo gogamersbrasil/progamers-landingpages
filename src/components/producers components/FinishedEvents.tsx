@@ -7,8 +7,9 @@ import AutoPlay from 'embla-carousel-autoplay';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import '../championships/carousel.css';
 
-export default function NextEvent() {
-  const { events, loading, error } = useEvents(false);
+export default function FinishedEvents() {
+  // Use the useEvents hook with showFinishedEvents=true to get only finished events
+  const { events, loading, error } = useEvents(true);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
 
@@ -16,7 +17,7 @@ export default function NextEvent() {
   const [emblaRef, emblaApi] = useEmblaCarousel(
     { 
       loop: true,
-      align: events?.length === 1 ? 'center' : 'start',
+      align: 'start',
       skipSnaps: false
     },
     [
@@ -56,11 +57,10 @@ export default function NextEvent() {
     <section className="bg-gaming-darker flex flex-col items-center justify-center py-10">
       <div className="relative z-10 text-center px-4 mb-8">
         <h1 className="text-center py-2 text-4xl md:text-4xl font-bold text-white">
-          Próximos <span className="text-red-500">Eventos</span>
+          Eventos <span className="text-red-500">Finalizados</span>
         </h1>
         <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-          Participe dos maiores torneios de e-sports e conquiste prêmios
-          incríveis
+          Confira os eventos que já aconteceram e fique por dentro da nossa história
         </p>
       </div>
 
@@ -78,7 +78,7 @@ export default function NextEvent() {
             <div className="embla__viewport" ref={emblaRef}>
               <div className="embla__container">
                 {events.map((event) => (
-                  <div key={event.entity.id} className={`embla__slide ${events.length === 1 ? 'single-slide' : ''}`}>
+                  <div key={event.entity.id} className="embla__slide">
                     <div className="px-3">
                       <EventCard event={event} />
                     </div>
@@ -121,7 +121,7 @@ export default function NextEvent() {
 
           {events.length === 0 && (
             <div className="text-center py-8 text-white">
-              Não há eventos disponíveis no momento. Fique atento para novidades!
+              Não há eventos finalizados disponíveis no momento.
             </div>
           )}
         </div>

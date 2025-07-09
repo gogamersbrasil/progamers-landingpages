@@ -60,7 +60,7 @@ export default function TestimonialsSection() {
           {testimonials.map((testimonial) => (
             <div
               key={testimonial.id}
-              className="bg-gaming-dark border border-gray-800 h-full hover:border-purple-500/30 transition-all duration-300"
+              className="  bg-gradient-to-b from-gray-800/40 border border-gray-800  to-gray-900/60 rounded-2xl h-full hover:border-purple-500/30 transition-all duration-300"
               style={{ cursor: "default" }}
             >
               <CardContent className="p-6 flex flex-col justify-between h-full">

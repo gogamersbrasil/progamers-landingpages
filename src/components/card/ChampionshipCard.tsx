@@ -6,12 +6,10 @@ import {
   Medal,
   Trophy,
 } from "lucide-react";
-import Link from "next/link";
 import dynamic from "next/dynamic";
 import { BaseResponse } from "@/hooks/interfaces/base";
 import {
-  ChampionshipStatus, 
-  ChampionshipStatusColors, 
+  ChampionshipStatus,
   ChampionshipStatusDescriptions, 
   IChampionships, 
   ChampionshipAdward
@@ -97,13 +95,8 @@ const ChampionshipCard: React.FC<CompetitionCardProps> = ({ championship, isReco
   };
 
   return (
-      <Link href={`/championships/${championship.entity.url_championship}`}>
+      <a href={`https://app.progamers.com.br/championships/${championship?.entity?.url_championship}`} target="_blank">
         <MotionDiv
-            initial="initial"
-            animate="animate"
-            whileHover="hover"
-            whileTap="tap"
-            variants={cardVariants}
             className={`w-full rounded-xl  overflow-hidden shadow-xl bg-gradient-to-b from-gray-800/40 to-gray-900/60 border ${
                 isRecommended
                     ? 'border-red-500/50 ring-2 ring-red-500/20'
@@ -200,7 +193,7 @@ const ChampionshipCard: React.FC<CompetitionCardProps> = ({ championship, isReco
               status !== ChampionshipStatus.UPCOMING ? (
                   <div className="  w-full ">
 
-                    <Countdown status={championship.entity.status} date={dateChampionship} max={championship?.entity.participant_limit} current={championship?.entity.registered_participants_count} label={labelCount} />
+                    <Countdown status={championship?.entity?.status} date={dateChampionship} max={championship?.entity.participant_limit} current={championship?.entity.registered_participants_count} label={labelCount} />
 
                   </div>
               ) : (
@@ -262,7 +255,7 @@ const ChampionshipCard: React.FC<CompetitionCardProps> = ({ championship, isReco
 
 
         </MotionDiv>
-      </Link>
+      </a>
   );
 };
 

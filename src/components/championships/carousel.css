@@ -24,6 +24,12 @@
   position: relative;
 }
 
+.single-slide {
+  --slide-size: 100% !important;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
 @media (min-width: 768px) {
   .embla {
     --slide-size: 50%;
