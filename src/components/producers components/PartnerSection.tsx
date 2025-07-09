@@ -22,7 +22,7 @@ export default function PartnerSection() {
           {partners.map((partner) => (
             <div
               key={partner.name}
-              className="border border-gray-800  p-6 rounded-lg flex items-center justify-center shadow-md"
+              className="bg-gradient-to-b from-gray-800/40 to-gray-900/60  p-6 rounded-lg flex items-center justify-center shadow-md"
             >
               <Image
                 src={partner.src}

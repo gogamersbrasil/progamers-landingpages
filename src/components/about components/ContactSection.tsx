@@ -100,7 +100,7 @@ if (content?.data?.tableRange) {
             {contactInfo.map((info, index) => (
               <div
                 key={index}
-                className="flex items-center space-x-4 p-4 bg-gaming-dark/50 rounded-lg border border-gray-800 hover:border-gaming-purple/30 transition-all duration-300"
+                className="flex items-center space-x-4 p-4 bg-gradient-to-b from-gray-800/40 to-gray-900/60 rounded-lg border border-gray-800 hover:border-gaming-purple/30 transition-all duration-300"
               >
                 <div
                   className={`w-12 h-12 rounded-full bg-gradient-to-r ${info.color} flex items-center justify-center`}
@@ -116,7 +116,7 @@ if (content?.data?.tableRange) {
           </div>
 
           <div>
-            <Card className="bg-gaming-dark border-gray-800">
+            <Card className="  bg-gradient-to-b from-gray-800/40 to-gray-900/60 border-gray-800">
               <CardHeader>
                 <CardTitle className="text-2xl font-bold text-white">
                   Envie sua Mensagem

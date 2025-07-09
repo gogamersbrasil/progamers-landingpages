@@ -26,7 +26,7 @@ const MissionSection: React.FC = () => {
   ];
 
   return (
-    <section className="py-12 bg-gaming-dark relative overflow-hidden">
+    <section className="py-12  relative overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute inset-0 bg-gaming-accent/10"></div>

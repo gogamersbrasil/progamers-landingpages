@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="0366c3d6-da06-4e68-9058-39da5fabad16" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/components/producers components/events/EventCard.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/hooks/interfaces/user-event-response.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/utils/date.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Header.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/about components/ContactSection.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/about components/ContactSection.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/card/ChampionshipCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/card/ChampionshipCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/championships/ChampionshipList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/championships/ChampionshipList.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/championships/carousel.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/championships/carousel.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/producers components/MissionCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/producers components/MissionCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/producers components/MissionSection.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/producers components/MissionSection.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/producers components/NextEvent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/producers components/NextEvent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/producers components/PartnerSection.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/producers components/PartnerSection.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/producers components/TestimonialsSection.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/producers components/TestimonialsSection.tsx" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 0
+}</component>
+  <component name="ProjectId" id="2zXn3jRq4nsrOc2kASIandkZrSQ" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feature/melhorias&quot;,
+    &quot;js.debugger.nextJs.config.created.client&quot;: &quot;true&quot;,
+    &quot;js.debugger.nextJs.config.created.server&quot;: &quot;true&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/jonasdev/Documentos/ProGamers/progamers-landingpages/src/hooks/interfaces&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/home/jonasdev/Documentos/ProGamers/progamers-landingpages/node_modules/typescript/lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/hooks/interfaces" />
+      <recent name="$PROJECT_DIR$/src/utils" />
+      <recent name="$PROJECT_DIR$/src/components/producers components/events" />
+      <recent name="$PROJECT_DIR$/src/components" />
+      <recent name="$PROJECT_DIR$/src/components/card" />
+    </key>
+  </component>
+  <component name="RunManager" selected="npm.Next.js: server-side">
+    <configuration name="Next.js: debug client-side" type="JavascriptDebugType" uri="http://localhost:3000/">
+      <method v="2" />
+    </configuration>
+    <configuration name="Next.js: server-side" type="js.build_tools.npm">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="dev" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-09060db00ec0-JavaScript-WS-251.26927.40" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0366c3d6-da06-4e68-9058-39da5fabad16" name="Changes" comment="" />
+      <created>1751886087649</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1751886087649</updated>
+      <workItem from="1751886089074" duration="1865000" />
+      <workItem from="1751927025700" duration="624000" />
+      <workItem from="1752018684942" duration="1729000" />
+      <workItem from="1752020419945" duration="3868000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/components/championship.interface.tsx</url>
+          <line>320</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

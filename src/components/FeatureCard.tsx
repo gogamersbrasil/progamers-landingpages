@@ -9,8 +9,7 @@ export default function FeatureCard({ icon, title, description }: FeatureCardPro
   return (
     <div
       className="
-        bg-gaming-darker 
-        border border-gray-800 
+        bg-gradient-to-b from-gray-800/40 to-gray-900/60
         p-5 
         rounded-xl 
         text-center 

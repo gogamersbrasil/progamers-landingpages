@@ -14,7 +14,7 @@ export default function StatCard({
   color = "",
 }: StatCardProps) {
   return (
-    <div className="bg-gaming-dark/50 backdrop-blur-sm border border-gray-800 rounded-2xl p-8 text-center hover:border-gaming-red/30 transition-all duration-300 hover:shadow-2xl hover:shadow-gaming-red/10">
+    <div className="bg-gaming-dark/50 backdrop-blur-sm bg-gradient-to-b from-gray-800/40 to-gray-900/60 rounded-2xl p-8 text-center hover:border-gaming-red/30 transition-all duration-300 hover:shadow-2xl hover:shadow-gaming-red/10">
       <div className="mb-6 flex justify-center">
         <div
           className={`p-4 rounded-full bg-gradient-to-br from-gray-800 to-gray-900 text-2xl shadow-lg ${color}`}
