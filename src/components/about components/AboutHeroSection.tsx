@@ -20,7 +20,7 @@ export default function AboutHeroSection (){
     },
     ]
     return (
-        <section className="relative  flex items-center justify-center bg-gradient-to-br from-gaming-darker via-gaming-dark to-gaming-darker overflow-hidden pt-20 flex-col">
+        <section className="relative py-10 flex items-center justify-center bg-gradient-to-br from-gaming-darker via-gaming-dark to-gaming-darker overflow-hidden pt-20 flex-col">
       <div className="container mx-auto px-4 relative z-10 text-center">
          <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-red-400 via-red-600 to-red-800 bg-clip-text text-transparent">
   Sobre a Pro Gamers

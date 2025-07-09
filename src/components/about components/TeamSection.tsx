@@ -160,7 +160,7 @@ export default function TeamSection() {
         {/* Embla viewport: largura total + overflow escondido */}
         <div className="overflow-hidden w-full" ref={emblaRef}>
           {/* Track do embla: display flex, margem negativa para compensar margens dos slides */}
-          <div className="flex" style={{ marginLeft: "-1.5rem" }}>
+          <div className="flex ml-4 p-5">
             {teamMembers.map((member) => (
               // Cada slide recebe margem esquerda para criar espaçamento entre cards
               <div
@@ -168,7 +168,7 @@ export default function TeamSection() {
                 className="min-w-[280px] md:min-w-[360px] lg:min-w-[400px] flex-shrink-0"
                 style={{ marginLeft: "1.5rem" }}
               >
-                <Card className="group w-100 h-full bg-gaming-darker border border-gray-800 transition-all duration-300 hover:border-gaming-purple/60 hover:shadow-lg hover:scale-[1.02]">
+                <Card className="group w-100 h-full border-none py-5    bg-gradient-to-b from-gray-800/40 to-gray-900/60   transition-all duration-300 hover:border-gaming-purple/60 hover:shadow-lg  ">
                   <CardContent className="p-6 text-center">
                     <div className="mt-6 mb-4 flex justify-center">
                       <div className="p-[3px] bg-gradient-to-tr from-pink-500 via-purple-500 to-indigo-500 rounded-full w-32 h-32 transition-transform duration-300 group-hover:scale-105">

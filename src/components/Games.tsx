@@ -2,7 +2,7 @@ import GamesCarousel from "@/components/GamesCarousel";
 
 export default function Games() {
   return (
-    <section className="py-0 bg-gaming-darker relative overflow-hidden">
+    <section className="py-10 bg-gaming-darker relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-br from-gaming-dark via-gaming-darker to-gaming-dark opacity-90 z-0" />
       
       <div className="relative z-10 text-center px-4">

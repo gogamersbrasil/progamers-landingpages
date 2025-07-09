@@ -1,170 +1,269 @@
-"use client";
-import { useEffect, useState } from "react";
-import { CalendarDays, Clock, Trophy } from "lucide-react";
+import React from "react";
+import {
+  Calendar,
+  CircleDollarSign,
+  Flame,
+  Medal,
+  Trophy,
+} from "lucide-react";
+import Link from "next/link";
+import dynamic from "next/dynamic";
+import { BaseResponse } from "@/hooks/interfaces/base";
+import {
+  ChampionshipStatus, 
+  ChampionshipStatusColors, 
+  ChampionshipStatusDescriptions, 
+  IChampionships, 
+  ChampionshipAdward
+} from "@/hooks/interfaces/championships.interface";
+import {FileBussinessType} from "@/hooks/interfaces/file.interface";
+import StatusBadge from "@/components/StatusBadge";
+import Countdown from "@/components/CountDown/Countdown";
 
-export enum ChampionshipStatus {
-  UPCOMING = "UPCOMING",
-  OPEN_FOR_REGISTRATION = "OPEN_FOR_REGISTRATION",
-  REGISTRATION_CLOSED = "REGISTRATION_CLOSED",
-  ONGOING = "ONGOING",
-  CANCELLED = "CANCELLED",
-  FINISHED = "FINISHED",
+// Import Framer Motion with SSR disabled
+const MotionDiv = dynamic(() => import("framer-motion").then((mod) => mod.motion.div), { ssr: false });
+const MotionImg = dynamic(() => import("framer-motion").then((mod) => mod.motion.img), { ssr: false });
+
+
+export interface CompetitionCardProps {
+  championship?: BaseResponse<IChampionships> | null;
+  isRecommended?: boolean;
 }
 
-interface ChampionshipCardProps {
-  id: string;
-  name: string;
-  status: ChampionshipStatus;
-  start_date: string;
-  end_date: string;
-  description?: string;
-  modality: string;
-  modality_type: string;
-  paid: boolean;
-  paid_value?: number;
-  participant_limit: number;
-  registration_start_date: string;
-  registration_end_date: string;
-  type: string;
-  created_at: string;
-  userStatus: string;
-  paymentStatus: string;
-  url_championship: string;
-  registration_participant_count: number; 
-}
+const ChampionshipCard: React.FC<CompetitionCardProps> = ({ championship, isRecommended = false }) => {
+  const id = championship?.entity?.id;
 
-export default function ChampionshipCard({
-  name,
-  start_date,
-  registration_end_date,
-  modality_type,
-  paid,
-  paid_value,
-  participant_limit,
-  userStatus,
-  registration_participant_count,
-  url_championship,
-}: ChampionshipCardProps) {
-  const calculateTimeLeft = () => {
-    const end = new Date(registration_end_date).getTime();
-    const now = new Date().getTime();
-    const diff = end - now;
+  const game = championship?.entity?.game?.files.find(
+      (item) => item.business_type === "GAMES_ICON"
+  );
 
-    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-    const minutes = Math.floor((diff / (1000 * 60)) % 60);
-    const seconds = Math.floor((diff / 1000) % 60);
+  const paidValue = championship?.entity?.paid_value;
+  const banner = championship?.files?.find(
+      (item) => item.business_type === FileBussinessType.CHAMPIONSHIP_CARD
+  );
 
-    return { days, hours, minutes, seconds };
+  const formatToCurrencyBRL = (value?: number) =>
+      value
+          ? new Intl.NumberFormat("pt-BR", {
+            style: "currency",
+            currency: "BRL",
+          }).format(value)
+          : "R$ 0,00";
+
+  const awards = championship?.entity?.championship_awards?.[0] ?? null;
+
+  const startDate = championship?.entity?.start_date;
+
+  const date = startDate
+      ? new Date(startDate).toLocaleDateString("pt-BR")
+      : "";
+  const time = startDate
+      ? new Date(startDate).toLocaleTimeString("pt-BR", {
+        hour: "2-digit",
+        minute: "2-digit",
+      })
+      : "";
+
+  const dateCount = () => {
+    if (championship?.entity?.status === ChampionshipStatus.OPEN_FOR_REGISTRATION) {
+      return {
+        labelCount: "Inscrições encerram em",
+        dateChampionship: championship?.entity?.registration_end_date,
+      };
+    }else if (championship?.entity?.status === ChampionshipStatus.REGISTRATION_CLOSED) {
+
+    }
+
+    return {
+      labelCount: "A competição inicia em",
+      dateChampionship: championship?.entity?.start_date,
+    };
   };
 
-  const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
+  const { labelCount, dateChampionship } = dateCount();
+  const status = championship?.entity?.status;
+  const statusLabel = status ? ChampionshipStatusDescriptions[status] : "Desconhecido";
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setTimeLeft(calculateTimeLeft());
-    }, 1000);
-
-    return () => clearInterval(timer);
-  }, [registration_end_date]);
-
-  const { days, hours, minutes, seconds } = timeLeft;
+  // Animation variants
+  const cardVariants = {
+    initial: { opacity: 0, y: 20 },
+    animate: { opacity: 1, y: 0, transition: { duration: 0.4 } },
+    hover: {
+      y: -5,
+      boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2)",
+      transition: { duration: 0.3, ease: "easeOut" }
+    },
+    tap: { scale: 0.98, transition: { duration: 0.1 } }
+  };
 
   return (
-    <div className="rounded-xl overflow-hidden shadow-lg border border-gray-700 relative max-w-sm w-full min-h-[100px]">
-      {/* Header com contador */}
-      <div className="bg-purple-800 p-4 text-white relative">
-        <span className="absolute top-2 right-2 bg-green-600 text-xs px-2 py-1 rounded">
-          Aberto para inscrições
-        </span>
-
-        <div className="mt-8 flex flex-col items-center">
-          <div className="text-sm text-white font-semibold mb-2">
-            Inscrições encerram em
-          </div>
-          <div className="flex gap-2">
-            {[{ label: "D", value: days }, { label: "H", value: hours }, { label: "M", value: minutes }, { label: "S", value: seconds }].map(
-              (item, idx) => (
-                <div
-                  key={idx}
-                  className="w-12 h-16 flex flex-col items-center justify-center rounded-md text-white font-bold bg-white/10 backdrop-blur-sm border border-white/20 shadow-inner"
+      <Link href={`/championships/${championship.entity.url_championship}`}>
+        <MotionDiv
+            initial="initial"
+            animate="animate"
+            whileHover="hover"
+            whileTap="tap"
+            variants={cardVariants}
+            className={`w-full rounded-xl  overflow-hidden shadow-xl bg-gradient-to-b from-gray-800/40 to-gray-900/60 border ${
+                isRecommended
+                    ? 'border-red-500/50 ring-2 ring-red-500/20'
+                    : 'border-gray-700/70'
+            } text-white hover:border-red-500/50 transition-all duration-300 ${
+                isRecommended ? 'relative' : ''
+            }`}
+        >
+          {isRecommended && (
+              <MotionDiv
+                  className="absolute -inset-0.5 bg-gradient-to-r from-red-500/20 to-red-700/20 rounded-xl blur-sm -z-10"
+                  animate={{
+                    opacity: [0.5, 0.7, 0.5],
+                  }}
+                  transition={{
+                    duration: 3,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+              ></MotionDiv>
+          )}
+          <div className="relative w-full">
+            <MotionImg
+                className="w-full md:45 h-38 sm:h-40 md:h-68 "
+                src={banner?.url}
+                alt={championship?.entity?.name}
+                whileHover={{ scale: 1.05, transition: { duration: 1.5 } }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
+            {game?.url && (
+                <MotionDiv
+                    initial={{ scale: 0.8, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{ delay: 0.2, duration: 0.3 }}
+                    className="absolute top-2 sm:top-3 left-2 sm:left-3"
                 >
-                  <div className="text-lg">
-                    {String(item.value).padStart(2, "0")}
-                  </div>
-                  <div className="text-xs">{item.label}</div>
-                </div>
-              )
+                  <img
+                      className="h-10 w-10 sm:h-12 sm:w-12 md:h-14 md:w-14 border-2 p-0.5 sm:p-1 rounded-lg shadow-md bg-gray-900/70 border-red-500/30"
+                      src={game.url}
+                      alt="Game icon"
+                  />
+                </MotionDiv>
             )}
-          </div>
-        </div>
 
-        <div className="mt-2 text-xs text-green-300 text-center">
-        {registration_participant_count}/{participant_limit} Inscritos
-        </div>
-      </div>
+            <div className="absolute top-0 sm:right-2 right-0 flex flex-col gap-2 sm:scale-100 scale-80">
+              <MotionDiv
+                  initial={{ x: 20, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  transition={{ delay: 0.1, duration: 0.3 }}
+              >
+                <StatusBadge
+                    status={status as ChampionshipStatus}
+                    label={statusLabel}
+                    className="h-5 sm:h-6 px-1.5 sm:px-3 text-xs sm:text-sm font-bold"
+                />
+              </MotionDiv>
 
-      {/* Conteúdo principal */}
-      <div className="flex flex-col p-4 text-white bg-[#0C1321] h-full">
-        {/* Nome do campeonato */}
-        <h2 className="text-lg text-justify-left font-bold uppercase  min-h-[3.5rem] mb-4">
-          {name}
-        </h2>
+              {isRecommended && (
+                  <MotionDiv
+                      initial={{ x: 20, opacity: 0 }}
+                      animate={{ x: 0, opacity: 1 }}
+                      transition={{ delay: 0.2, duration: 0.3 }}
+                      className="bg-gradient-to-r from-red-500 to-red-700  text-white px-2 py-1 rounded-full text-xs font-bold flex items-center shadow-lg relative overflow-hidden group"
+                  >
+                    <span className="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity duration-300"></span>
+                    <Flame size={12} className="mr-1 animate-pulse" />
+                    Recomendado para Você
+                  </MotionDiv>
+              )}
+            </div>
 
-        {/* Data e hora */}
-        <div className="flex justify-baseline gap-4 mb-2">
-          <div className="flex items-center gap-2 text-sm text-gray-300">
-            <CalendarDays size={16} />
-            {new Date(start_date).toLocaleDateString("pt-BR")}
-          </div>
-          <div className="flex items-center gap-2 text-sm text-gray-300">
-            <Clock size={16} />
-            {new Date(start_date).toLocaleTimeString("pt-BR", {
-              hour: "2-digit",
-              minute: "2-digit",
-            })}
-          </div>
-        </div>
 
-        {/* Modalidade e inscrição */}
-        <div className="flex justify-center gap-2 mb-4 text-white text-sm">
-          {/* Modalidade */}
-          <div className="flex flex-col bg-[#172130] p-4 rounded-md w-full">
-            <span className="text-gray-400 text-xs mb-1 flex items-center gap-1">
-              <svg width="12" height="12" fill="currentColor" className="text-gray-500">
-                <path d="M3 6l3 3 3-3H3z" />
-              </svg>
-              Modalidade
-            </span>
-            <span className="bg-green-700 text-center text-xs px-3 py-1 rounded-full w-full font-semibold">
-              {modality_type}
-            </span>
+            <div className="absolute bottom-0 left-1  flex flex-col sm:flex-row  ">
+
+              <div className="flex items-center backdrop-blur-sm bg-white/10 border border-white/20 px-2 py-1 rounded-md relative w-fit bottom-2 shadow-lg">
+                <Calendar size={14} className="text-red-400 flex-shrink-0" />
+                <p className="text-gray-300 text-xs sm:text-sm font-medium ml-1.5">
+                  {date} - {time}
+                </p>
+              </div>
+            </div>
+
           </div>
 
-          {/* Inscrição */}
-          <div className="flex flex-col bg-[#172130] p-4 rounded-md w-full">
-            <span className="text-gray-400 text-xs mb-1 flex items-center gap-1">
-              <svg width="12" height="12" fill="currentColor" className="text-gray-500">
-                <circle cx="6" cy="6" r="5" />
-              </svg>
-              Inscrição
-            </span>
-            <span className="bg-emerald-600 text-center text-xs px-3 py-1 rounded-full w-full font-semibold">
-              {paid ? `R$ ${paid_value?.toFixed(2)}` : "Gratuito"}
-            </span>
-          </div>
-        </div>
 
-        {/* Premiação e botão */}
-        <div className="mt-auto">
-          <button
-            onClick={() => window.open(url_championship, "_blank")}
-            className="bg-gradient-to-r from-red-600 to-red-400 hover:from-red-700 hover:to-red-500 text-white px-4 py-2 rounded-md transition-all w-full"
-          >
-            Ver Detalhes
-          </button>
-        </div>
-      </div>
-    </div>
+          <div className="p-4 sm:p-5 bg-gradient-to-b from-gray-800/30 to-gray-900/30">
+            <h3 className="text-base sm:text-xl md:text-2xl font-bold mb-2 sm:mb-3 line-clamp-2 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+              {championship?.entity?.name}
+            </h3>
+
+            <div className="flex flex-row relative top-1 items-center flex-wrap gap-1.5 sm:gap-2.5 mb-3 sm:mb-4">
+
+              {status !== ChampionshipStatus.FINISHED &&
+              status !== ChampionshipStatus.UPCOMING ? (
+                  <div className="  w-full ">
+
+                    <Countdown status={championship.entity.status} date={dateChampionship} max={championship?.entity.participant_limit} current={championship?.entity.registered_participants_count} label={labelCount} />
+
+                  </div>
+              ) : (
+                  <div></div>
+              )}
+            </div>
+
+            <div className="grid grid-cols-2 gap-3 sm:gap-4 mb-3 sm:mb-4">
+              <div className="bg-gradient-to-b from-gray-800/70 to-gray-900/70 rounded-lg p-2.5 sm:p-3.5   border-gray-700/50 hover:border-red-500/30 transition-colors duration-300">
+                <h4 className="text-xs font-semibold text-white mb-1.5 flex items-center gap-1.5">
+                  <Trophy size={14} strokeWidth={1.5} className="text-red-400" />
+                  Premiação
+                </h4>
+                {awards?.entity ? (
+                    <div className="font-semibold flex flex-row gap-1.5 items-center">
+                      <Medal strokeWidth={1.5} size={14} className="text-yellow-300 flex-shrink-0" />
+                      {awards.entity.type === ChampionshipAdward.MONEY ? (
+                          <span className="text-yellow-300 font-bold text-xs sm:text-sm">
+                                        {formatToCurrencyBRL(awards.entity.value)}
+                                    </span>
+                      ) : (
+                          <span className="text-yellow-300 font-bold text-xs sm:text-sm">
+                                        {awards.entity.value ?? "—"}
+                                    </span>
+                      )}
+                    </div>
+                ) : (
+                    <div className="text-gray-400 italic text-xs flex items-center gap-1.5">
+                      <span className="w-1.5 h-1.5 bg-gray-500/50 rounded-full"></span>
+                      Sem premiação definida
+                    </div>
+                )}
+              </div>
+
+              <div className="bg-gradient-to-b from-gray-800/70 to-gray-900/70 rounded-lg p-2.5 sm:p-3.5   border-gray-700/50 hover:border-red-500/30 transition-colors duration-300">
+                <h4 className="text-xs font-semibold text-white mb-1.5 flex items-center gap-1.5">
+                  <CircleDollarSign size={14} strokeWidth={1.5} className="text-red-400" />
+                  Inscrição
+                </h4>
+                <div
+                    className={`px-2.5 py-1.5 gap-1.5 flex flex-row items-center text-xs font-semibold rounded-full ${
+                        !championship?.entity?.paid
+                            ? "bg-green-500/30 text-green-300"
+                            : "bg-yellow-300/30 text-yellow-300"
+                    }`}
+                >
+                  <CircleDollarSign strokeWidth={1.5} size={14} className="flex-shrink-0" />
+                  <span className="truncate">{!championship?.entity?.paid ? "Gratuito" : `${formatToCurrencyBRL(paidValue)}`}</span>
+                </div>
+                {championship?.entity?.paid && championship?.entity?.registration_price && (
+                    <div className="mt-1.5 text-xs text-gray-400 pl-1.5 flex items-center">
+                      <span className="w-1.5 h-1.5 bg-yellow-500/50 rounded-full mr-1.5"></span>
+                      Taxa: {formatToCurrencyBRL(championship.entity.registration_price)}
+                    </div>
+                )}
+              </div>
+            </div>
+          </div>
+
+
+        </MotionDiv>
+      </Link>
   );
-}
+};
+
+export default ChampionshipCard;

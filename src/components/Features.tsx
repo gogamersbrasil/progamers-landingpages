@@ -54,7 +54,7 @@ export default function Features() {
     },
   ];
   return (
-    <section className=" pt-10 bg-gaming-dark relative z-10">
+    <section className=" pt-10 py-10  ">
       <div className="container mx-auto px-4 text-center mb-12">
         <h2 className="text-3xl mb-2 md:text-4xl font-bold bg-gradient-to-r from-red-600 to-red-400 bg-clip-text text-transparent">
   Recursos para Jogadores
