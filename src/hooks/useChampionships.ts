@@ -1,7 +1,7 @@
 'use client';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import {ChampionshipStatus, IChampionships} from "@/hooks/interfaces/championships.interface";
+import {IChampionships} from "@/hooks/interfaces/championships.interface";
 import {BaseResponse, EntityResponse} from "@/hooks/interfaces/base";
 
 export function useChampionships() {

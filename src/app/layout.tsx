@@ -21,7 +21,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="dark">
+      <head>
+        <link rel="icon" href="/icone.png" />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
@@ -29,7 +32,7 @@ export default function RootLayout({
 
         <main className="pt-16">{children}</main>
 
-        
+
         <Toaster
           position="top-right"
           toastOptions={{

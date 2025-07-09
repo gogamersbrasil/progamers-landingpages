@@ -17,6 +17,7 @@ import {
 import {FileBussinessType} from "@/hooks/interfaces/file.interface";
 import StatusBadge from "@/components/StatusBadge";
 import Countdown from "@/components/CountDown/Countdown";
+import Link from "next/link";
 
 // Import Framer Motion with SSR disabled
 const MotionDiv = dynamic(() => import("framer-motion").then((mod) => mod.motion.div), { ssr: false });
@@ -29,7 +30,6 @@ export interface CompetitionCardProps {
 }
 
 const ChampionshipCard: React.FC<CompetitionCardProps> = ({ championship, isRecommended = false }) => {
-  const id = championship?.entity?.id;
 
   const game = championship?.entity?.game?.files.find(
       (item) => item.business_type === "GAMES_ICON"
@@ -82,20 +82,9 @@ const ChampionshipCard: React.FC<CompetitionCardProps> = ({ championship, isReco
   const status = championship?.entity?.status;
   const statusLabel = status ? ChampionshipStatusDescriptions[status] : "Desconhecido";
 
-  // Animation variants
-  const cardVariants = {
-    initial: { opacity: 0, y: 20 },
-    animate: { opacity: 1, y: 0, transition: { duration: 0.4 } },
-    hover: {
-      y: -5,
-      boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2)",
-      transition: { duration: 0.3, ease: "easeOut" }
-    },
-    tap: { scale: 0.98, transition: { duration: 0.1 } }
-  };
 
   return (
-      <a href={`https://app.progamers.com.br/championships/${championship?.entity?.url_championship}`} target="_blank">
+      <Link href={`https://app.progamers.com.br/championships/${championship?.entity?.url_championship}`} target="_blank">
         <MotionDiv
             className={`w-full rounded-xl  overflow-hidden shadow-xl bg-gradient-to-b from-gray-800/40 to-gray-900/60 border ${
                 isRecommended
@@ -192,9 +181,7 @@ const ChampionshipCard: React.FC<CompetitionCardProps> = ({ championship, isReco
               {status !== ChampionshipStatus.FINISHED &&
               status !== ChampionshipStatus.UPCOMING ? (
                   <div className="  w-full ">
-
                     <Countdown status={championship?.entity?.status} date={dateChampionship} max={championship?.entity.participant_limit} current={championship?.entity.registered_participants_count} label={labelCount} />
-
                   </div>
               ) : (
                   <div></div>
@@ -255,7 +242,7 @@ const ChampionshipCard: React.FC<CompetitionCardProps> = ({ championship, isReco
 
 
         </MotionDiv>
-      </a>
+      </Link>
   );
 };
 
