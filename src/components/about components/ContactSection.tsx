@@ -2,6 +2,7 @@
 import React, { FormEvent, useState } from "react";
 import { Mail, Phone, MapPin } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "./card";
+import toast from "react-hot-toast";
 
 export default function ContactSection() {
   const [name, setName] = useState("");
@@ -30,12 +31,11 @@ export default function ContactSection() {
 
 const content = await response.json();
 
-console.log(content);
 
 if (content?.data?.tableRange) {
-  alert('mensagem enviada com sucesso');
+  toast.success("Mensagem enviada com sucesso!");
 } else {
-  alert("Erro ao enviar formulário.");
+  toast.error("Erro ao enviar formulário.");
 }
 
     setName('');
