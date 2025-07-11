@@ -40,18 +40,16 @@ export default function PartnerSection() {
             Fizemos parceiras com empresas incríveis!
           </h2>
           <p className="text-gray-300 mb-6">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi,
-            atque eaque eius esse sit harum inventore ipsam nam necessitatibus
-            nemo pariatur provident.
+            Ser parceiro da Progamers é contribuir diretamente para a evolução do cenário de e-sports, promovendo inovação, profissionalismo e novas oportunidades para todos os envolvidos.
           </p>
           <p className="text-gray-300 mb-6">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi,
-            atque eaque eius esse sit harum inventore ipsam nam necessitatibus
-            nemo pariatur provident.
+            Além disso, sua empresa ganha visibilidade e credibilidade ao se associar a grandes eventos, ampliando o alcance da sua marca e fortalecendo sua presença no universo gamer.
           </p>
-          <button className=" bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-6 py-3 rounded-md transition-all">
-            seja nosso parceiro
-          </button>
+          <a href="https://wa.me/5585981122763?text=quero%20ser%20parceiro" target="_blank" rel="noreferrer" className="w-full">
+            <button className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-6 py-3 text-lg rounded-md shadow-lg transition-all duration-300 transform hover:scale-105">
+              Seja nosso parceiro
+            </button>
+          </a>
         </div>
       </div>
     </section>

@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import {
   Calendar,
@@ -181,7 +182,13 @@ const ChampionshipCard: React.FC<CompetitionCardProps> = ({ championship, isReco
               {status !== ChampionshipStatus.FINISHED &&
               status !== ChampionshipStatus.UPCOMING ? (
                   <div className="  w-full ">
-                    <Countdown status={championship?.entity?.status} date={dateChampionship} max={championship?.entity.participant_limit} current={championship?.entity.registered_participants_count} label={labelCount} />
+                    <Countdown
+                      status={championship?.entity?.status ?? ""}
+                      date={dateChampionship ? String(dateChampionship) : null}
+                      max={championship?.entity.participant_limit ?? 0}
+                      current={championship?.entity.registered_participants_count ?? 0}
+                      label={labelCount}
+                    />
                   </div>
               ) : (
                   <div></div>

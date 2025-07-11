@@ -67,21 +67,20 @@ export default function FeaturesSection() {
           </TabsList>
 
           <TabsContent value="producers">
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
               {producerFeatures.map((feature) => (
                 <FeatureCard
                   key={feature.id}
                   title={feature.title}
                   description={feature.description}
                   icon={feature.icon}
-                  
                 />
               ))}
             </div>
           </TabsContent>
 
           <TabsContent value="brands">
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
               {brandFeatures.map((feature) => (
                 <FeatureCard
                   key={feature.id}

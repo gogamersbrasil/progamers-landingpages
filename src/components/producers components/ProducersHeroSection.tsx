@@ -4,10 +4,17 @@ import { ChevronRight } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 
+
+
+ 
+
+
 export default function ProducersHeroSection() {
   const router = useRouter();
   const videoRef = useRef<HTMLVideoElement>(null);
   const [showContent, setShowContent] = useState(false);
+  
+  
 
   useEffect(() => {
     const video = videoRef.current;
@@ -31,8 +38,8 @@ export default function ProducersHeroSection() {
       {/* Vídeo de fundo */}
       <video
         ref={videoRef}
-        className="absolute inset-0 w-full h-full object-cover z-0"
-        src="/video2.mp4"
+        className="absolute inset-0 w-full h-full object-cover z-0 scale-150 sm:scale-100 transition-transform duration-500"
+        src="/video5.mp4"
         autoPlay
         muted
         playsInline
@@ -62,6 +69,7 @@ export default function ProducersHeroSection() {
               <ChevronRight className="h-5 w-5" />
             </button>
           </div>
+          
         </div>
       )}
     </section>

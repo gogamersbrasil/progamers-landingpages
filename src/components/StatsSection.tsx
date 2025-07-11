@@ -19,7 +19,7 @@ export default function StatsSection() {
     {
       id: 1,
       icon: <Users className="h-8 w-8" />,
-      value: 50000,
+      value: 5000,
       label: "Gamers Ativos",
       suffix: "+",
       color: "text-gaming-accent"
@@ -27,7 +27,7 @@ export default function StatsSection() {
     {
       id: 2,
       icon: <Trophy className="h-8 w-8" />,
-      value: 1500,
+      value: 1000,
       label: "Torneios Realizados",
       suffix: "+",
       color: "text-gaming-yellow"
@@ -35,7 +35,7 @@ export default function StatsSection() {
     {
       id: 3,
       icon: <Target className="h-8 w-8" />,
-      value: 250000,
+      value: 40000,
       label: "Reais em Prêmios",
       suffix: "+",
       color: "text-gaming-red"
@@ -43,7 +43,7 @@ export default function StatsSection() {
     {
       id: 4,
       icon: <Calendar className="h-8 w-8" />,
-      value: 24,
+      value: 2,
       label: "Eventos por Mês",
       color: "text-gaming-purple"
     }
