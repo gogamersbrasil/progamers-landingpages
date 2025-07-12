@@ -55,13 +55,13 @@ if (content?.data?.tableRange) {
     {
       icon: Phone,
       title: "Telefone",
-      content: "+55 (11) 9999-9999",
+      content: "+55 (85) 98112-2763",
       color: "from-gaming-accent to-blue-600",
     },
     {
       icon: MapPin,
       title: "Endereço",
-      content: "São Paulo, SP - Brasil",
+      content: "Fortaleza, CE - Brasil",
       color: "from-gaming-purple to-purple-600",
     },
   ];

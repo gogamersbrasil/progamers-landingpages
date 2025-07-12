@@ -65,16 +65,17 @@ export default function Header() {
             <Link
               target="blank"
               href="https://app.progamers.com.br/auth"
-              className="gaming-link flex items-center"
+              className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg flex items-center transition-all duration-300 hover:scale-105 hover:shadow-lg cursor-pointer"
             >
-              <User size={16} className="mr-1" />
+              <User size={16} className="mr-2" />
               Login
             </Link>
             <Link
               target="blank"
               href="https://app.progamers.com.br/register"
-              className="gaming-button"
+              className="bg-transparent border-2 border-gray-400 hover:border-white text-white px-4 py-2 rounded-lg flex items-center transition-all duration-300 hover:scale-105 hover:shadow-lg cursor-pointer hover:bg-gray-800"
             >
+              <LogOut size={16} className="mr-2" />
               Sign Up
             </Link>
           </div>
@@ -82,7 +83,7 @@ export default function Header() {
           <div className="md:hidden">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="text-white hover:text-gaming-red focus:outline-none"
+              className="text-white hover:text-gaming-red focus:outline-none transition-colors duration-300"
               aria-label="Toggle menu"
             >
               {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -96,7 +97,7 @@ export default function Header() {
           <div className="px-4 pt-2 pb-4 space-y-3">
             <Link
               href="/"
-              className="block py-2 text-white hover:text-gaming-red"
+              className="block py-2 text-white hover:text-gaming-red transition-colors duration-300"
               onClick={() => setIsMenuOpen(false)}
             >
               <span className="flex items-center">
@@ -106,7 +107,7 @@ export default function Header() {
             </Link>
             <Link
               href="/about-us"
-              className="block py-2 text-white hover:text-gaming-red"
+              className="block py-2 text-white hover:text-gaming-red transition-colors duration-300"
               onClick={() => setIsMenuOpen(false)}
             >
               <span className="flex items-center">
@@ -116,7 +117,7 @@ export default function Header() {
             </Link>
             <Link
               href="/producers"
-              className="block py-2 text-white hover:text-gaming-red"
+              className="block py-2 text-white hover:text-gaming-red transition-colors duration-300"
               onClick={() => setIsMenuOpen(false)}
             >
               <span className="flex items-center">
@@ -124,10 +125,11 @@ export default function Header() {
                 Para Produtores
               </span>
             </Link>
-            <div className="pt-2 border-t border-gray-700">
+            <div className="pt-2 border-t border-gray-700 space-y-2">
               <Link
-                href="/login"
-                className="block py-2 text-white hover:text-gaming-red"
+                target="blank"
+                href="https://app.progamers.com.br/auth"
+                className="block py-2 px-3 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-all duration-300 hover:scale-105 cursor-pointer"
                 onClick={() => setIsMenuOpen(false)}
               >
                 <span className="flex items-center">
@@ -136,8 +138,9 @@ export default function Header() {
                 </span>
               </Link>
               <Link
-                href="/signup"
-                className="block py-2 text-white hover:text-gaming-red"
+                target="blank"
+                href="https://app.progamers.com.br/register"
+                className="block py-2 px-3 bg-transparent border border-gray-400 hover:border-white text-white rounded-lg transition-all duration-300 hover:scale-105 cursor-pointer hover:bg-gray-800"
                 onClick={() => setIsMenuOpen(false)}
               >
                 <span className="flex items-center">
