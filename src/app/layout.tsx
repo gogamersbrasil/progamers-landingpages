@@ -32,7 +32,6 @@ export default function RootLayout({
 
         <main className="pt-16">{children}</main>
 
-
         <Toaster
           position="top-right"
           toastOptions={{
@@ -43,13 +42,13 @@ export default function RootLayout({
             },
             success: {
               iconTheme: {
-                primary: "#10B981", 
+                primary: "#10B981",
                 secondary: "#fff",
               },
             },
             error: {
               iconTheme: {
-                primary: "#EF4444", 
+                primary: "#EF4444",
                 secondary: "#fff",
               },
             },
