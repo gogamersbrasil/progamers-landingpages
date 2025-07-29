@@ -3,12 +3,11 @@
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
 import Image from "next/image";
-import { useCallback, useState, useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import "../components/championships/carousel.css";
 
 const images = [
-
   { src: "/jogos/valorant.jpg", title: "Valorant" },
   { src: "/jogos/lol.jpg", title: "League of Legends" },
   { src: "/jogos/fortnite.jpg", title: "Fortnite" },
@@ -16,9 +15,6 @@ const images = [
 ];
 
 export default function GamesCarousel() {
-  const [selectedIndex, setSelectedIndex] = useState(0);
-  const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
-
   const [emblaRef, emblaApi] = useEmblaCarousel(
     {
       loop: true,
@@ -28,30 +24,28 @@ export default function GamesCarousel() {
     [Autoplay({ delay: 4000, stopOnInteraction: false })]
   );
 
-  const onSelect = useCallback(() => {
-    if (!emblaApi) return;
-    setSelectedIndex(emblaApi.selectedScrollSnap());
-  }, [emblaApi, setSelectedIndex]);
-
-  const scrollTo = useCallback(
-    (index: number) => emblaApi && emblaApi.scrollTo(index),
+  const scrollPrev = useCallback(
+    () => emblaApi && emblaApi.scrollPrev(),
     [emblaApi]
   );
-
-  const scrollPrev = useCallback(() => emblaApi && emblaApi.scrollPrev(), [emblaApi]);
-  const scrollNext = useCallback(() => emblaApi && emblaApi.scrollNext(), [emblaApi]);
+  const scrollNext = useCallback(
+    () => emblaApi && emblaApi.scrollNext(),
+    [emblaApi]
+  );
 
   useEffect(() => {
     if (!emblaApi) return;
 
-    setScrollSnaps(emblaApi.scrollSnapList());
-    emblaApi.on('select', onSelect);
-    onSelect();
+    const handleSelect = () => {
+      // Handle selection if needed
+    };
+
+    emblaApi.on("select", handleSelect);
 
     return () => {
-      emblaApi.off('select', onSelect);
+      emblaApi.off("select", handleSelect);
     };
-  }, [emblaApi, onSelect]);
+  }, [emblaApi]);
 
   return (
     <div className="relative">
@@ -80,22 +74,20 @@ export default function GamesCarousel() {
           </div>
         </div>
 
-        <button 
-          className="embla__prev" 
+        <button
+          className="embla__prev"
           onClick={scrollPrev}
           aria-label="Previous slide"
         >
           <ChevronLeft size={24} />
         </button>
-        <button 
-          className="embla__next" 
+        <button
+          className="embla__next"
           onClick={scrollNext}
           aria-label="Next slide"
         >
           <ChevronRight size={24} />
         </button>
-
-
       </div>
     </div>
   );

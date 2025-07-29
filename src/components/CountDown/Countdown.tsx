@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { AlertTriangle } from "lucide-react";
-import {ChampionshipStatus} from "@/hooks/interfaces/championships.interface";
+import { ChampionshipStatus } from "@/hooks/interfaces/championships.interface";
 
 // Define the CSS animation for gradient movement and glass reflection
 const gradientAnimation = `
@@ -66,7 +66,13 @@ interface CountdownProps {
   label: string;
 }
 
-const Countdown: React.FC<CountdownProps> = ({ date, current, max, label, status }) => {
+const Countdown: React.FC<CountdownProps> = ({
+  date,
+  current,
+  max,
+  label,
+  status,
+}) => {
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
     hours: 0,
@@ -103,52 +109,92 @@ const Countdown: React.FC<CountdownProps> = ({ date, current, max, label, status
   const showWarning = status === ChampionshipStatus.OPEN_FOR_REGISTRATION;
 
   // Determine progress bar color based on availability and status
-  const progressBarClass = showWarning && isCritical
-    ? "h-full bg-gradient-to-r from-red-500/80 to-red-600/80 animate-pulse shadow-[0_0_8px_rgba(239,68,68,0.5)]"
-    : showWarning && isRunningOut
-    ? "h-full bg-gradient-to-r from-yellow-400/80 to-orange-500/80 shadow-[0_0_8px_rgba(234,179,8,0.4)]"
-    : "h-full bg-gradient-to-r from-green-400/80 to-green-500/80 shadow-[0_0_8px_rgba(74,222,128,0.4)]";
+  const progressBarClass =
+    showWarning && isCritical
+      ? "h-full bg-gradient-to-r from-red-500/80 to-red-600/80 animate-pulse shadow-[0_0_8px_rgba(239,68,68,0.5)]"
+      : showWarning && isRunningOut
+      ? "h-full bg-gradient-to-r from-yellow-400/80 to-orange-500/80 shadow-[0_0_8px_rgba(234,179,8,0.4)]"
+      : "h-full bg-gradient-to-r from-green-400/80 to-green-500/80 shadow-[0_0_8px_rgba(74,222,128,0.4)]";
 
   return (
     <>
       <style dangerouslySetInnerHTML={{ __html: gradientAnimation }} />
-      <div className={`relative inline-flex rounded-lg shadow-lg overflow-hidden w-full glass-reflection
-        ${showWarning && isRunningOut ? '  border-yellow-500/30' : ''} 
-        ${showWarning && isCritical ? '  border-red-500/30' : ''} 
-        ${!showWarning || (!isRunningOut && !isCritical) ? '  border-white/10' : ''}`}>
+      <div
+        className={`relative inline-flex rounded-lg shadow-lg overflow-hidden w-full glass-reflection
+        ${showWarning && isRunningOut ? "  border-yellow-500/30" : ""} 
+        ${showWarning && isCritical ? "  border-red-500/30" : ""} 
+        ${
+          !showWarning || (!isRunningOut && !isCritical)
+            ? "  border-white/10"
+            : ""
+        }`}
+      >
         {/* Content */}
-        <div className={`relative z-10 px-3 py-1.5 flex flex-col items-center 
+        <div
+          className={`relative z-10 px-3 py-1.5 flex flex-col items-center 
           bg-white/5 backdrop-blur-md w-full 
-          ${showWarning && isCritical ? 'bg-red-900/10' : showWarning && isRunningOut ? 'bg-yellow-900/10' : ''}
-          before:absolute before:inset-0 before:bg-gradient-to-b before:from-white/10 before:to-transparent before:opacity-30 before:z-0`}>
-          <span className="text-xs font-medium text-white/90 mb-0.5 z-10">{label}</span>
+          ${
+            showWarning && isCritical
+              ? "bg-red-900/10"
+              : showWarning && isRunningOut
+              ? "bg-yellow-900/10"
+              : ""
+          }
+          before:absolute before:inset-0 before:bg-gradient-to-b before:from-white/10 before:to-transparent before:opacity-30 before:z-0`}
+        >
+          <span className="text-xs font-medium text-white/90 mb-0.5 z-10">
+            {label}
+          </span>
 
           <div className="flex items-center justify-center z-10">
             {["days", "hours", "minutes", "seconds"].map((unit, idx) => (
               <React.Fragment key={idx}>
                 <div className="flex flex-row gap-1 items-center">
-                  <span className={`text-sm font-bold ${showWarning && isCritical ? 'text-red-300' : 'text-white/95'} drop-shadow-sm`}>
-                    {String((timeLeft as any)[unit]).padStart(2, "0")}
+                  <span
+                    className={`text-sm font-bold ${
+                      showWarning && isCritical
+                        ? "text-red-300"
+                        : "text-white/95"
+                    } drop-shadow-sm`}
+                  >
+                    {String(
+                      (timeLeft as Record<string, number>)[unit]
+                    ).padStart(2, "0")}
                   </span>
                   <span className="text-[10px] uppercase tracking-wide text-white/80">
                     {unit.substring(0, 1)}
                   </span>
                 </div>
-                {idx < 3 && <span className="mx-1 text-white/60 text-sm font-bold">:</span>}
+                {idx < 3 && (
+                  <span className="mx-1 text-white/60 text-sm font-bold">
+                    :
+                  </span>
+                )}
               </React.Fragment>
             ))}
           </div>
 
           {/* Spots remaining warning - only show when status is OPEN_FOR_REGISTRATION */}
           {isRunningOut && showWarning && (
-            <div className={`flex items-center justify-center mt-1 z-10 
-                ${showWarning && isCritical ? 'text-red-300/90 bg-red-900/20' : 'text-yellow-300/90 bg-yellow-900/20'} 
-                px-2 py-0.5 rounded-full backdrop-blur-sm`} 
-                style={{ animation: showWarning && isCritical ? 'pulse 1.5s infinite' : 'none' }}>
+            <div
+              className={`flex items-center justify-center mt-1 z-10 
+                ${
+                  showWarning && isCritical
+                    ? "text-red-300/90 bg-red-900/20"
+                    : "text-yellow-300/90 bg-yellow-900/20"
+                } 
+                px-2 py-0.5 rounded-full backdrop-blur-sm`}
+              style={{
+                animation:
+                  showWarning && isCritical ? "pulse 1.5s infinite" : "none",
+              }}
+            >
               <AlertTriangle size={12} className="mr-1" />
               <span className="text-xs font-semibold">
-                {isCritical 
-                  ? `Apenas ${spotsLeft} ${spotsLeft === 1 ? 'vaga restante!' : 'vagas restantes!'}` 
+                {isCritical
+                  ? `Apenas ${spotsLeft} ${
+                      spotsLeft === 1 ? "vaga restante!" : "vagas restantes!"
+                    }`
                   : `Apenas ${spotsLeft} vagas restantes!`}
               </span>
             </div>

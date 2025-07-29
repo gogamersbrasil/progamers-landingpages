@@ -60,7 +60,7 @@ const EventCountdown: React.FC<CountdownProps> = ({
 
     // Cleanup interval on component unmount
     return () => clearInterval(timer);
-  }, [targetDate]);
+  }, [targetDate, time]);
 
   if (timeLeft.isExpired) {
     return (

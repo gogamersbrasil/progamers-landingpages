@@ -1,8 +1,13 @@
 "use client";
-import { Card, CardContent, CardHeader, CardTitle } from "../../components/card/card";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "../../components/card/card";
 import toast from "react-hot-toast";
 import { useState, type FormEvent } from "react";
-import { Users, Cpu, Zap, Sliders, ShieldCheck, Globe2 } from "lucide-react";
+import { Users, Cpu, Zap, Sliders, ShieldCheck } from "lucide-react";
 export default function CtaProducer() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -16,20 +21,19 @@ export default function CtaProducer() {
       name,
       email,
       subject,
-      message
-    }
+      message,
+    };
 
-    const response = await fetch('/api/submit', {
-      method: 'POST',
+    const response = await fetch("/api/submit", {
+      method: "POST",
       headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
+        Accept: "application/json",
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(form)
+      body: JSON.stringify(form),
     });
 
     const content = await response.json();
-
 
     if (content?.data?.tableRange) {
       toast.success("Mensagem enviada com sucesso!");
@@ -37,10 +41,10 @@ export default function CtaProducer() {
       toast.error("Erro ao enviar formulário.");
     }
 
-    setName('');
-    setEmail('');
-    setSubject('');
-    setMessage('');
+    setName("");
+    setEmail("");
+    setSubject("");
+    setMessage("");
   };
   return (
     <section className="relative w-full min-h-[600px] flex flex-col items-center justify-center overflow-hidden py-12">
@@ -58,8 +62,13 @@ export default function CtaProducer() {
 
       {/* Título e subtítulo sempre acima */}
       <div className="relative z-10 w-full max-w-3xl mx-auto text-center mb-8 px-4">
-        <h1 className="text-3xl md:text-4xl font-bold text-white mb-2">Pronto para Impulsionar sua Presença nos E-sports?</h1>
-        <p className="text-base md:text-xl text-gray-300">Participe dos maiores torneios de e-sports e conquiste prêmios incríveis</p>
+        <h1 className="text-3xl md:text-4xl font-bold text-white mb-2">
+          Pronto para Impulsionar sua Presença nos E-sports?
+        </h1>
+        <p className="text-base md:text-xl text-gray-300">
+          Participe dos maiores torneios de e-sports e conquiste prêmios
+          incríveis
+        </p>
       </div>
 
       {/* Conteúdo principal: botões e formulário */}
@@ -69,11 +78,15 @@ export default function CtaProducer() {
           {/* Texto de vantagens com tópicos e ícones */}
           <div className="mb-4 text-left">
             <p className="text-white text-xl font-semibold mb-3 text-justify">
-              Tenha a <span className="font-bold text-purple-400">Progamers</span> no seu evento e garanta uma experiência completa com os melhores resultados. Confira as vantagens:
+              Tenha a{" "}
+              <span className="font-bold text-purple-400">Progamers</span> no
+              seu evento e garanta uma experiência completa com os melhores
+              resultados. Confira as vantagens:
             </p>
             <ul className="mt-3 space-y-3">
               <li className="flex items-center gap-2 text-white text-lg">
-                <Users className="text-purple-400 w-6 h-6" /> Organização Profissional
+                <Users className="text-purple-400 w-6 h-6" /> Organização
+                Profissional
               </li>
               <li className="flex items-center gap-2 text-white text-lg">
                 <Cpu className="text-purple-400 w-6 h-6" /> Tecnologia de Ponta
@@ -82,19 +95,31 @@ export default function CtaProducer() {
                 <Zap className="text-purple-400 w-6 h-6" /> Engajamento Máximo
               </li>
               <li className="flex items-center gap-2 text-white text-lg">
-                <Sliders className="text-purple-400 w-6 h-6" /> Personalização Total
+                <Sliders className="text-purple-400 w-6 h-6" /> Personalização
+                Total
               </li>
               <li className="flex items-center gap-2 text-white text-lg">
-                <ShieldCheck className="text-purple-400 w-6 h-6" /> Credibilidade e Alcance
+                <ShieldCheck className="text-purple-400 w-6 h-6" />{" "}
+                Credibilidade e Alcance
               </li>
             </ul>
           </div>
-          <a href="https://app.progamers.com.br/register" target="_blank" rel="noreferrer" className="w-full">
+          <a
+            href="https://app.progamers.com.br/register"
+            target="_blank"
+            rel="noreferrer"
+            className="w-full"
+          >
             <button className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-6 py-3 text-lg rounded-md shadow-lg transition-all duration-300 transform hover:scale-105">
               Criar Conta
             </button>
           </a>
-          <a href="https://wa.me/5585981122763?text=quero%20ser%20parceiro" target="_blank" rel="noreferrer" className="w-full">
+          <a
+            href="https://wa.me/5585981122763?text=quero%20ser%20parceiro"
+            target="_blank"
+            rel="noreferrer"
+            className="w-full"
+          >
             <button className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-6 py-3 text-lg rounded-md shadow-lg transition-all duration-300 transform hover:scale-105">
               Falar com um consultor
             </button>
@@ -109,9 +134,17 @@ export default function CtaProducer() {
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <form className="py-6 px-4 space-y-5 rounded-xl shadow-lg" onSubmit={handleSubmit}>
+              <form
+                className="py-6 px-4 space-y-5 rounded-xl shadow-lg"
+                onSubmit={handleSubmit}
+              >
                 <div className="flex flex-col space-y-1">
-                  <label htmlFor="name" className="text-white text-sm font-medium">Nome</label>
+                  <label
+                    htmlFor="name"
+                    className="text-white text-sm font-medium"
+                  >
+                    Nome
+                  </label>
                   <input
                     value={name}
                     onChange={(e) => setName(e.target.value)}
@@ -123,7 +156,12 @@ export default function CtaProducer() {
                   />
                 </div>
                 <div className="flex flex-col space-y-1">
-                  <label htmlFor="email" className="text-white text-sm font-medium">Email</label>
+                  <label
+                    htmlFor="email"
+                    className="text-white text-sm font-medium"
+                  >
+                    Email
+                  </label>
                   <input
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
@@ -135,7 +173,12 @@ export default function CtaProducer() {
                   />
                 </div>
                 <div className="flex flex-col space-y-1">
-                  <label htmlFor="subject" className="text-white text-sm font-medium">Assunto</label>
+                  <label
+                    htmlFor="subject"
+                    className="text-white text-sm font-medium"
+                  >
+                    Assunto
+                  </label>
                   <input
                     value={subject}
                     onChange={(e) => setSubject(e.target.value)}
@@ -147,7 +190,12 @@ export default function CtaProducer() {
                   />
                 </div>
                 <div className="flex flex-col space-y-1">
-                  <label htmlFor="message" className="text-white text-sm font-medium">Mensagem</label>
+                  <label
+                    htmlFor="message"
+                    className="text-white text-sm font-medium"
+                  >
+                    Mensagem
+                  </label>
                   <textarea
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}

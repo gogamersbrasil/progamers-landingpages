@@ -1,0 +1,26 @@
+- name: Deploy platform service
+  hosts: all
+  become: true
+  vars:
+    region: "{{ region }}"
+    ecr_image: "010438464392.dkr.ecr.us-east-2.amazonaws.com/progamers/prod-plataform:latest"
+  tasks:
+    - name: Login to Amazon ECR
+      shell: |
+        AWS_ACCESS_KEY_ID={{ aws_access_key_id }} \
+        AWS_SECRET_ACCESS_KEY={{ aws_secret_access_key }} \
+        aws ecr get-login-password --region {{ region }} | docker login --username AWS --password-stdin 010438464392.dkr.ecr.us-east-2.amazonaws.com
+      register: ecr_login_result
+      changed_when: false
+      failed_when: "'error' in ecr_login_result.stderr.lower()"
+
+    - name: Stop platform
+      shell: "cd infra && docker-compose stop frontend"
+      ignore_errors: true
+
+    - name: Pull new image
+      shell: cd infra && docker pull "{{ ecr_image }}"
+
+    - name: Stop platform
+      shell: "cd infra && docker-compose up -d"
+      ignore_errors: true

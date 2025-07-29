@@ -1,0 +1,72 @@
+name: Build, Test and Deploy Frontend Service
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout Repository
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      # Step 2: Configure AWS Credentials for ECR
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID_PROD }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_PROD }}
+          aws-region: us-east-2
+
+      # Step 3: Login to Amazon ECR
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      # Step 4: Set up Docker Buildx
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      # Step 5: Build and Push Docker Image
+      - name: Build and Push Docker Image
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          push: true
+          platforms: linux/amd64
+          tags: ${{ secrets.ECR_URI_PROD }}:latest
+          build-args: |
+            VITE_SOME_ENVIRONMENT=${{ secrets.VITE_SOME_ENVIRONMENT_PROD }}
+            VITE_SOME_API_URL=${{ secrets.VITE_SOME_API_URL_PROD }}
+            VITE_SOME_APP_FACEBOOK_KEY=${{ secrets.VITE_SOME_APP_FACEBOOK_KEY_PROD }}
+            VITE_SOME_APP_GOOGLE_KEY=${{ secrets.VITE_SOME_APP_GOOGLE_KEY_PROD }}
+            VITE_SOME_SENTRY_DNS=${{ secrets.VITE_SOME_SENTRY_DNS_PROD }}
+            SENTRY_AUTH_TOKEN=${{ secrets.SENTRY_AUTH_TOKEN }}
+            VITE_STRIPE_PUBLIC_KEY=${{ secrets.VITE_STRIPE_PUBLIC_KEY_PROD }}
+            VITE_STRIPE_SECRET_KEY=${{ secrets.VITE_STRIPE_SECRET_KEY_PROD }}
+
+      # Step 10: Install Ansible and Dependencies
+      - name: Install Ansible
+        run: |
+          sudo apt update
+          sudo apt install -y ansible ssh
+
+      # Step 11: Create PEM File from Secret
+      - name: Create SSH Key
+        run: |
+          echo "${{ secrets.AWS_PEM_KEY_PROD }}" > /tmp/aws-key.pem
+          chmod 600 /tmp/aws-key.pem
+
+      # Step 12: Deploy to EC2 with Ansible
+      - name: Deploy Frontend Service
+        run: |
+          ansible-playbook -i "${{ secrets.EC2_PUBLIC_IP_PROD }}," ansible/deploy-platform-prod.yml \
+            --private-key=/tmp/aws-key.pem \
+            --user=ec2-user \
+            --extra-vars "aws_access_key_id=${{ secrets.AWS_ACCESS_KEY_ID_PROD }} aws_secret_access_key=${{ secrets.AWS_SECRET_ACCESS_KEY_PROD }} region=us-east-2"
+        env:
+          ANSIBLE_HOST_KEY_CHECKING: "False"

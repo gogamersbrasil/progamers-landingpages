@@ -31,9 +31,9 @@ export interface EventEntity {
   events_championship: EventChampionshipRelation[];
   event_championships_entity: EventChampionshipEntity[];
   event_page_entity: EventPageEntity;
-  events_arenas_entity: any[];
-  events_attractions_entity: any[];
-  event_schedule: any[];
+  events_arenas_entity: unknown[];
+  events_attractions_entity: unknown[];
+  event_schedule: unknown[];
 }
 
 export interface EventChampionshipRelation {
@@ -81,9 +81,9 @@ export interface ChampionshipEntity {
   stripe_price_id: string | null;
   payment_link_url: string | null;
   url_championship: string;
-  championship_award: any[];
-  championship_result: any[];
-  championship_stage: any[];
+  championship_award: unknown[];
+  championship_result: unknown[];
+  championship_stage: unknown[];
 }
 
 export interface EventPageEntity {
@@ -106,7 +106,7 @@ export interface EventPageEntity {
       backgroundImage: string;
     };
     headline: string;
-    socialLink: any[];
+    socialLink: unknown[];
     cta: {
       text: string;
       link: string;

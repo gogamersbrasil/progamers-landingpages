@@ -1,6 +1,6 @@
-'use client';
-import axios from 'axios';
-import { useEffect, useState } from 'react';
+"use client";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { EntityResponse } from "@/hooks/interfaces/base";
 import { EventData } from "@/components/producers components/events/EventCard";
 
@@ -14,7 +14,7 @@ export function useEvents(showFinishedEvents?: boolean) {
       try {
         setLoading(true);
         const response = await axios.get(
-          'https://api.progamers.com.br/public/events?limit=20'
+          "https://api.progamers.com.br/public/events?limit=20"
         );
 
         let fetchedEvents: EventData[] = [];
@@ -25,12 +25,13 @@ export function useEvents(showFinishedEvents?: boolean) {
           fetchedEvents = response.data;
         } else if (response.data && Array.isArray(response.data.data)) {
           // Fallback to the old format if the new structure is not found
-          fetchedEvents = response.data.data
-            .map((item: EntityResponse<any>) => ({
+          fetchedEvents = response.data.data.map(
+            (item: EntityResponse<EventData>) => ({
               entityId: item.entityId,
               entity: item.entity,
-              files: item.files
-            }));
+              files: item.files,
+            })
+          );
         } else {
           // Last resort fallback
           fetchedEvents = response.data || [];
@@ -41,22 +42,24 @@ export function useEvents(showFinishedEvents?: boolean) {
         // Filter events based on showFinishedEvents parameter
         if (showFinishedEvents === true) {
           // Show only finished events
-          const finishedEvents = fetchedEvents.filter(event => {
+          const finishedEvents = fetchedEvents.filter((event) => {
             const endDate = new Date(event.entity.end_date);
             return endDate < now; // Event is finished if end_date is before now
           });
           setEvents(finishedEvents);
         } else {
           // Filter out finished events by default
-          const upcomingEvents = fetchedEvents.filter(event => {
+          const upcomingEvents = fetchedEvents.filter((event) => {
             const endDate = new Date(event.entity.end_date);
             return endDate >= now; // Event is not finished if end_date is not before now
           });
           setEvents(upcomingEvents);
         }
       } catch (error) {
-        console.error('Erro ao buscar eventos:', error);
-        setError(error instanceof Error ? error : new Error('Unknown error occurred'));
+        console.error("Erro ao buscar eventos:", error);
+        setError(
+          error instanceof Error ? error : new Error("Unknown error occurred")
+        );
       } finally {
         setLoading(false);
       }
