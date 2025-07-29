@@ -3,7 +3,7 @@
   become: true
   vars:
     region: "{{ region }}"
-    ecr_image: "010438464392.dkr.ecr.us-east-2.amazonaws.com/progamers/prod-plataform:latest"
+    ecr_image: "010438464392.dkr.ecr.us-east-2.amazonaws.com/progamers/prod-landpage:latest"
   tasks:
     - name: Login to Amazon ECR
       shell: |

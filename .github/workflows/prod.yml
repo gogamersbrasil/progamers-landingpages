@@ -58,7 +58,7 @@ jobs:
       # Step 11: Create PEM File from Secret
       - name: Create SSH Key
         run: |
-          echo "${{ secrets.AWS_PEM_KEY_PROD }}" > /tmp/aws-key.pem
+          echo "${{ secrets.AWS_KEY_PEM }}" > /tmp/aws-key.pem
           chmod 600 /tmp/aws-key.pem
 
       # Step 12: Deploy to EC2 with Ansible
